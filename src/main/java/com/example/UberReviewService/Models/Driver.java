@@ -1,6 +1,7 @@
 package com.example.UberReviewService.Models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import lombok.*;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,6 @@ public class Driver extends BaseModel {
     private String driverName;
     private String licenseNumber;
 
-    @OneToMany(mappedBy = "driver")
+    @OneToMany(mappedBy = "driver",fetch = FetchType.LAZY)
     List<Booking> bookings=new ArrayList<>();
 }
