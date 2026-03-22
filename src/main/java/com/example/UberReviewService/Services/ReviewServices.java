@@ -6,14 +6,15 @@ import com.example.UberReviewService.Models.Review;
 import com.example.UberReviewService.Repositories.BookingRepository;
 import com.example.UberReviewService.Repositories.DriverRepository;
 import com.example.UberReviewService.Repositories.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.awt.print.Book;
+import java.util.*;
 
 @Service
+@Transactional
 public class ReviewServices implements CommandLineRunner {
     private ReviewRepository reviewRepository;
     private BookingRepository bookingRepository;
@@ -60,8 +61,28 @@ public class ReviewServices implements CommandLineRunner {
 //        Optional<Driver> d=driverRepository.rawQueryFindByIdAndLicenseNumber(1l,"dfkj");
 //        System.out.println(d.get().getDriverName());//
 //
-        Optional<Driver> d=driverRepository.hqlQueryFindByIdAndLicenseNumber(1l,"dfkj");
-        System.out.println(d.get().getDriverName());
+//        Optional<Driver> d=driverRepository.hqlQueryFindByIdAndLicenseNumber(1l,"dfkj");
+//        System.out.println(d.get().getDriverName());
+
+        List<Long> arrayId=new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L,6L));
+        List<Driver> drivers=driverRepository.findAllByIdIn(arrayId);
+
+        for(Driver driver:drivers){
+            System.out.println(driver.getBookings().size());
+        }
+
+        //        n+1 problem
+//        for(Driver driver:drivers){
+//            List<Booking> bookingsL=driver.getBookings();
+//            for(Booking book:bookingsL){
+//                System.out.println(book.getId());
+//            }
+//        }
+
+        //one way to solve n+1 problem
+//        List<Booking> bookingList=bookingRepository.findAllBookingsByDriverIn(drivers);
+
+
 //        reviewRepository.deleteById(1L);
     }
 }

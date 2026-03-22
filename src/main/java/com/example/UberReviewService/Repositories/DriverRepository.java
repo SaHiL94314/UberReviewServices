@@ -5,11 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface DriverRepository extends JpaRepository<Driver,Long> {
 
+    List<Driver> findAllByIdIn(List<Long> arrayId);
     Optional<Driver> findByIdAndLicenseNumber(Long id,String license);
 
 
@@ -20,6 +22,7 @@ public interface DriverRepository extends JpaRepository<Driver,Long> {
     //hibernate query,error is thrown at compile time
     @Query("Select d from Driver d where d.id=:id and d.licenseNumber=:license")
     Optional<Driver> hqlQueryFindByIdAndLicenseNumber(Long id,String license);
+
 
 
 }
