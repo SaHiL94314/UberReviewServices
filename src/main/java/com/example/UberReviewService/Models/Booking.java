@@ -13,6 +13,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class Booking extends BaseModel{
 
+
+    //
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
     private Review review; // there is one to one mapping between booking and review
 

@@ -10,16 +10,15 @@ import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.*;
 
 @Service
 @Transactional
-public class ReviewServices implements CommandLineRunner {
+public class ReviewServices_deletable implements CommandLineRunner {
     private ReviewRepository reviewRepository;
     private BookingRepository bookingRepository;
     private DriverRepository driverRepository;
-    public ReviewServices(ReviewRepository reviewRepository,BookingRepository bookingRepository,DriverRepository driverRepository){
+    public ReviewServices_deletable(ReviewRepository reviewRepository, BookingRepository bookingRepository, DriverRepository driverRepository){
         this.reviewRepository=reviewRepository;
         this.bookingRepository=bookingRepository;
         this.driverRepository=driverRepository;
